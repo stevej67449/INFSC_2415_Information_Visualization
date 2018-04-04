@@ -1,0 +1,200 @@
+
+<html>
+    
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    
+<head>
+    
+<title>D3.js Dashboard Introduction</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" charset="utf-8"></script>
+    
+    <script src="http://d3js.org/d3.v4.min.js"></script>
+
+    
+    <script type="text/javascript">
+        
+        window.onload=dashboardUpdate();
+
+        function dashboardUpdate() {
+            // ***** PIE CHART SECTION *****
+            
+            // Create variable to hold category counts
+            var singleRIGO = 0;
+            var singleMSA = 0;
+            var singleRIGOandMSA = 0;
+            var multipleRIGO = 0;
+            var multipleRIGOandMSA = 0;
+            var noAffiliation = 0;
+            var totalCounties = 0;
+            
+            
+            // Access tsv file with RIGO/MSA data
+            d3.tsv("County_Muni_RIGO_Boundaries.tsv", function(data) {
+
+                // Iterate through rows determining which counts to increase
+                
+                data.forEach(function(d) {
+                    // Increase County Tally
+                    totalCounties++;
+                    // One RIGO and MSA Affiliation
+                    if (d.RIGOCodeNo != 99 && d.RIGO2 == 0 && d.Muni == 1) {
+                        singleRIGOandMSA++
+                    // Multiple RIGO and MSA Affiliation    
+                    } else if (d.RIGOCodeNo != 99 && d.RIGO2 != 0 && d.Muni == 1) {
+                        multipleRIGOandMSA++   
+                    // Single RIGO Affiliation    
+                    } else if (d.RIGOCodeNo != 99 && d.RIGO2 == 0 && d.Muni == 0) {
+                        singleRIGO++
+                    // Multiple RIGO Affiliation    
+                    } else if (d.RIGOCodeNo != 99 && d.RIGO2 != 0 && d.Muni == 0) {
+                        multipleRIGO++  
+                    // Single MSA Affiliation    
+                    } else if (d.RIGOCodeNo == 99 && d.RIGO2 == 0 && d.Muni == 1) {
+                        singleMSA++
+                    // No Affiliation
+                    } else if (d.RIGOCodeNo == 99 && d.RIGO2 == 0 && d.Muni == 0) {
+                        noAffiliation++
+                    }  
+                });
+                
+            console.log("Total Counties & Municipalities: " + totalCounties);    
+            console.log("Only One RIGO: " + singleRIGO);
+            console.log("Only One MSA: " + singleMSA);
+            console.log("One RIGO & One MSA: " + singleRIGOandMSA);
+            console.log("Multiple RIGOs: " + multipleRIGO);
+            console.log("Multiple RIGOs & One MSA: " + multipleRIGOandMSA);
+            console.log("No RIGO or MSA: " + noAffiliation);
+                
+            var countsJSON = [
+                             { countName: "totalCounties",count: totalCounties },
+                             { countName: "singleRIGO", count: singleRIGO },
+                             { countName: "singleMSA", count: singleMSA },
+                             { countName: "singleRIGOandMSA", count: singleRIGOandMSA },
+                             { countName: "multipleRIGO", count: multipleRIGO },
+                             { countName: "multipleRIGOandMSA", count: multipleRIGOandMSA },
+                             { countName: "noAffiliation", count: noAffiliation }
+                            ];
+            
+            var donutWidth = 100;
+            var donutHeight = 100;
+            var donutRadius = Math.min(donutWidth, donutHeight) / 2;
+            var donutHole = 25;
+
+            var color = d3.scaleOrdinal(d3.schemeCategory20);
+
+            var svg = d3.select('#chart')
+              .append('svg')
+              .attr('width', donutWidth)
+              .attr('height', donutHeight)
+              .append('g')
+              .attr('transform', 'translate(' + (donutWidth / 2) +  ',' + (donutHeight / 2) + ')');
+            
+            var arc = d3.arc()
+              .innerRadius(donutRadius - donutHole)
+              .outerRadius(donutRadius); 
+            
+            var pie = d3.pie()
+              .value(function(d) { 
+                  console.log(d.count)
+                  return d.count; 
+                })
+              .sort(null);
+            
+            var path = svg.selectAll('path')
+              .data(pie(countsJSON))
+              .enter()
+              .append('path')
+              .attr('d', arc)
+              .attr('fill', function(d, i) {
+                return color(d.data.countName);
+              });    
+                
+                
+                
+                
+                
+                
+             
+            });  
+            
+            
+           
+
+        }
+        
+
+        
+    </script>
+
+    <style>
+        /*  Dashboard Layout/Appearence CSS */
+        #dashboard {
+            border: 1px solid black;
+            border-radius: 10px;
+            width: 80%;
+            height: 25%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        
+        #comparison {
+            width: 49%;
+            height: 100%;
+            float: left;
+            border-right: 1px solid black;   
+        }
+        
+        #affiliation {
+           width: 49%;
+            height: 100%;
+            float: left;
+            text-align: center;
+            font-size: 100%;
+        }
+        
+        /* D3.js Related CSS */
+        /* Source: https://gist.github.com/cnaithani/1ceda79527a698950d60628ed935d745 */
+        
+            body {
+                font-family: 'Roboto', sans-serif;
+                color: #333333;
+            }
+        
+        #chart {
+            margin-top: 2%;
+        }
+        
+
+    </style>
+
+</head>
+
+<body>
+
+	<h1>A D3.js Dashboard</h1>
+
+	<div id="dashboard">
+        <div id="total">
+        
+        </div>
+        
+        <div id="comparison">
+        
+        </div>
+        
+        <div id="affiliation">
+          <div id="chart"></div>
+        </div>
+	</div>
+
+	
+    
+
+
+</body>
+
+</html>
+

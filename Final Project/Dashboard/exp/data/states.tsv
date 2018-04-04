@@ -1,0 +1,52 @@
+color	state	name	id
+198	AL	Alabama	1
+55	AK	Alaska	2
+30	AZ	Arizona	4
+346	AR	Arkansas	5
+198	CA	California	6
+346	CO	Colorado	8
+198	CT	Connecticut	9
+198	DC	Delaware	10
+55	DE	District of Columbia	11
+30	FL	Florida	12
+346	GA	Georgia	13
+55	HI	Hawaii	15
+346	ID	Idaho	16
+74	IL	Illinois	17
+346	IN	Indiana	18
+346	IA	Iowa	19
+74	KS	Kansas	20
+30	KY	Kentucky	21
+74	LA	Louisiana	22
+74	ME	Maine	23
+30	MD	Maryland	24
+30	MA	Massachusetts	25
+30	MI	Michigan	26
+74	MN	Minnesota	27
+30	MS	Mississippi	28
+198	MO	Missouri	29
+30	MT	Montana	30
+30	NE	Nebraska	31
+55	NV	Nevada	32
+55	NH	New Hampshire	33
+55	NJ	New Jersey	34
+74	NM	New Mexico	35
+30	NY	New York	36
+198	NC	North Carolina	37
+346	ND	North Dakota	38
+198	OH	Ohio	39
+30	OK	Oklahoma	40
+74	OR	Oregon	41
+346	PA	Pennsylvania	42
+55	RI	Rhode Island	44
+30	SC	South Carolina	45
+198	SD	South Dakota	46
+74	TN	Tennessee	47
+198	TX	Texas	48
+198	UT	Utah	49
+346	VT	Vermont	50
+346	VA	Virginia	51
+30	WA	Washington	53
+74	WV	West Virginia	54
+198	WI	Wisconsin	55
+55	WY	Wyoming	56

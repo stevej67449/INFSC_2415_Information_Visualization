@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <style>
+    body {
+      font: 10px sans-serif;
+    }
+    
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #000;
+      shape-rendering: crispEdges;
+    }
+    
+    .x.axis path {
+      display: none;
+    }
+    
+    .line {
+      fill: none;
+      stroke: steelblue;
+      stroke-width: 3px;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+
+    var margin = {
+        top: 20,
+        right: 180,
+        bottom: 30,
+        left: 50
+      },
+      width = 900 - margin.left - margin.right,
+      height = 500 - margin.top - margin.bottom;
+
+	var x = d3.scale.linear()
+		.range([0, width]);
+
+    var y = d3.scale.linear()
+      .range([height, 0]);
+
+    var color = d3.scale.category20();
+
+	var xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(d3.format("d"));
+
+
+    var yAxis = d3.svg.axis()
+      .scale(y)
+      .orient("left");
+
+    var line = d3.svg.line()
+		.defined(function(d) { return !isNaN(d.percent); })
+		.interpolate("basis")
+		.x(function(d) {
+			return x(d.year);
+		})
+		.y(function(d) {
+			return y(d.percent);
+		});
+	  
+	  	
+
+    var svg = d3.select("body").append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	
+	var data = d3.tsv("d1test.tsv", function (data) {
+    
+		color.domain(d3.keys(data[0]).filter(function(key) { return key !== "year"; }));
+		
+
+		var tseries = color.domain().map(function(race) {
+		  return {
+			race: race,
+			values: data.map(function(d) {
+			  return {
+				year: d.year,
+				percent: +d[race]/100
+			  };
+			})
+		  };
+		});
+	
+
+		x.domain(d3.extent(data, function(d) {
+		  return d.year;
+		}));
+
+		y.domain([
+		  d3.min(tseries, function(c) {
+			return d3.min(c.values, function(v) {
+			  return v.percent;
+			});
+		  }),
+		  d3.max(tseries, function(c) {
+			return d3.max(c.values, function(v) {
+			  return v.percent;
+			});
+		  })
+		]);
+
+		var legend = svg.selectAll('g')
+		  .data(tseries)
+		  .enter()
+		  .append('g')
+		  .attr('class', 'legend');
+
+		legend.append('rect')
+		  .attr('x', width + 20)
+		  .attr('y', function(d, i) {
+			return i * 20;
+		  })
+		  .attr('width', 10)
+		  .attr('height', 10)
+		  .style('fill', function(d) {
+			return color(d.race);
+		  });
+
+		legend.append('text')
+		  .attr('x', width +32)
+		  .attr('y', function(d, i) {
+			return (i * 20) + 9;
+		  })
+		  .text(function(d) {
+			return d.race;
+		  });
+
+		svg.append("g")
+		  .attr("class", "x axis")
+		  .attr("transform", "translate(0," + height + ")")
+		  .call(xAxis);
+
+		svg.append("g")
+		  .attr("class", "y axis")
+		  .call(yAxis)
+		  .append("text")
+		  .attr("transform", "rotate(-90)")
+		  .attr("y", 6)
+		  .attr("dy", ".71em")
+		  .style("text-anchor", "end")
+		  .text("percent (%)");
+
+		var city = svg.selectAll(".city")
+		  .data(tseries)
+		  .enter().append("g")
+		  .attr("class", "city");
+
+		city.append("path")
+		  .attr("class", "line")
+		  .attr("d", function(d) {
+			return line(d.values);
+		  })
+		  .style("stroke", function(d) {
+			return color(d.race);
+		  });
+
+		city.append("text")
+		  .datum(function(d) {
+			return {
+			  name: d.race,
+			  value: d.values[d.values.length - 1]
+			};
+		  })
+		  .attr("transform", function(d) {
+			return "translate(" + x(d.value.year) + "," + y(d.value.percent) + ")";
+		  })
+		  .attr("x", 3)
+		  .attr("dy", ".35em")
+		  .text(function(d) {
+			return d.race;
+		  });
+
+
+    });  
+  </script>
+</body>
+
+</html>

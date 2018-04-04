@@ -1,0 +1,402 @@
+
+<html>
+	<head>
+		<title>RGOs vs MSAs</title>
+		<script src="http://d3js.org/topojson.v1.min.js"></script>
+		<script src="http://d3js.org/d3.v3.min.js"></script>
+		<script src="https://d3js.org/d3-queue.v3.min.js"></script>
+		<!-- Core Bootstrap -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+		<!-- Jquery CDN -->
+		<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+		<!-- Bootstrap JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+		<style>
+
+			.background {
+			  fill: none;
+			  pointer-events: all;
+			}
+
+			#municipalities .active {
+				display:auto;
+			}
+
+			.municipality {
+				stroke: hsla(0, 0%, 22%, 1);
+				stroke-width: .5px;
+			}
+
+			.municipality:hover {
+				fill: hsla(55, 81%, 51%, 1);
+			}
+
+		</style>
+	</head>
+    <body>
+		<div class="container">
+			<div class="page-header">
+				<h1>"The Buck Stops Where?": A comparison of Regional Governments and Major Population Areas</h1>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-8" id="map-container">
+					<div id="map">
+					</div>
+				</div>
+				<div class="col-md-4 text-center">
+					<div class="btn-group btn-group-justified">
+						<a href="#RGO" class="btn btn-success" onclick="RGO()">RGO</a>
+						<a href="#MSA" class="btn btn-success" onclick="MSA()">MSA</a>
+					</div>
+
+					<h3>Information Pane</h3>
+					<div class="well">
+						<ul class="list-group text-left">
+							<li class="list-group-item">State: <span id="stateID"></span></li>
+							<li class="list-group-item">Municipality: <span id="countyID"></span></li>
+							<li class="list-group-item">RGO: <span id="rgoID"></span></li>
+							<li class="list-group-item">MSA: <span id="msaID"></span></li>
+							<li class="list-group-item">Population: <span id="popID"></span></li>
+
+						</ul>
+
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12" id="description">
+					<p>Metropolitan Statistical Areas (MSAs) are a statistical aggregation of local governments compiled by the federal government that reflect commuting and commerce patterns but are generally unassociated with any actual form of governance. While these boundaries generally align with what could be considered a metropolitan area, the decision-making bodies that bring local governments together to make regional policies and investments fall along drastically different boundaries. Regional Governing Organizations (RGOs) are governance institutions who work across a variety of policy issue areas with representational rights for the local governments within its footprint.</p>
+					<p>This map shows the largest RGOs within a given region (color). In the absence of an RGO, any region's relevant MPO (Metropolitan Planning Organization - a decision-making body solely dedicated to transportation funding) is identified in grayscale. Counties participating in neither an RGO nor an MPO appear in white. Unique cases of regional governance that diverge from the formal definition are coded in black.</p>
+					<p>This map highlights the spatial mismatches between the boundaries of MSAs and RGOs to help better understand the ways in which data could and should be collected and aggregated to actually drive better policy making in American regions.</p>
+				</div>
+			</div>
+		</div>
+		<script>
+	location.replace("http://www.pitt.edu/~frankeny/final/ne.html#RGO");
+    // GLOBAL Variables
+	var yellow = "hsla(55, 81%, 51%, 1)";
+	var municipalities = d3.map();
+	var states = d3.map();
+	var colors = d3.map();
+	var rgo = d3.map();
+	var msa = d3.map();
+
+    // For bounding box zoom
+/*	var width = 1200,
+		height = 800;*/
+    var width = $("#map-container").width(),
+        height = $("#map-container").width() * 0.625,
+
+/*	var width = 800,
+        height = 500,*/
+        active = d3.select(null);
+
+    var projection;
+
+
+    var path;  // For all counties
+
+	var svg = d3.select("#map").append("svg")
+			.attr("preserveAspectRatio","xMidYMid meet")
+			.attr("viewBox", "0 0 1500 1500")
+			.attr("width", width)
+			.attr("height", height)
+			.on("click", stopped, true);
+
+    svg.append("rect")
+        .attr("class", "background")
+
+
+    var g = svg.append("g");
+
+    var zoom = d3.behavior.zoom()
+        .translate([0, 0])
+        .scale(1)
+        .scaleExtent([1, 8])
+        .on("zoom", zoomed);
+
+    svg.call(zoom) // delete this line to disable free zooming
+    .call(zoom.event);
+
+    // Rest of D3
+
+	d3.queue()
+	.defer(d3.tsv,
+		"data/states.tsv",
+  		function (d){
+			colors.set(d.state, d.color);
+			states.set(d.id, d.name);
+  		}
+	).await(
+			function next() {
+			d3.queue()
+			.defer(
+				d3.json,
+				"data/ct.topo.json"
+			)
+			.defer(
+				d3.json,
+				"data/ma.topo.json"
+			)
+			.defer(
+				d3.json,
+				"data/ri.topo.json"
+			)
+			.defer(
+				d3.json,
+				"data/vt.topo.json"
+			)
+			.defer(
+				d3.json,
+				"data/nh.topo.json"
+			)
+			.defer(d3.tsv,
+				"data/muni.tsv",
+				function (d){
+					municipalities.set(d.id, d);
+					municipalities.get(d.id).rgo_color = get_color(municipalities.get(d.id).rgo_code_st, municipalities.get(d.id).rgo_code_no);
+					if (municipalities.get(d.id).msa_code == '0')
+						municipalities.get(d.id).msa_color = get_color("", 0);
+					else
+						municipalities.get(d.id).msa_color = get_color(municipalities.get(d.id).msa_code.substring(0, 2), municipalities.get(d.id).msa_code.substring(2, 4));
+					if (rgo.has(municipalities.get(d.id).rgo_code))
+						rgo.get(municipalities.get(d.id).rgo_code).push(d.id);
+					else {
+						temp = Array();
+						temp.push(d.id);
+						rgo.set(municipalities.get(d.id).rgo_code, temp);
+					}
+					if (msa.has(municipalities.get(d.id).msa_code))
+						msa.get(municipalities.get(d.id).msa_code).push(d.id);
+					else {
+						temp = Array();
+						temp.push(d.id);
+						msa.set(municipalities.get(d.id).msa_code, temp);
+					}
+				}
+			)
+			.await(ready);
+		}
+	);
+	
+	function ready(error, ct, ma, ri, vt, nh) {
+
+		var projection = d3.geo.albersUsa()
+							 .scale(17000)
+							 .translate([-4500, 2700]);
+/*		projection = d3.geo.albersUsa()
+					 .scale(1000)
+					 .translate([width / 2, height / 2]);*/
+
+		// State and county lines
+		path = d3.geo.path()
+			   .projection(projection);
+
+	   g.append("g")
+		.attr("id", "municipalities")
+		.selectAll("path")
+		.data(topojson.feature(ct, ct.objects.ct).features)
+		.enter().append("path")
+		.attr("d", path)
+		.attr("fill", function (d) { if (municipalities.get(fix_id(d.id)) == null) { console.log(d.id); return yellow; } else return municipalities.get(fix_id(d.id)).rgo_color; })
+		.attr("class", "municipality")
+		.attr("id", function(d) { return "c" + fix_id(d.id); })
+		.on("click", reset)
+		.on("mouseleave", clear)
+		.on("mouseenter", hover);
+
+	   g.append("g")
+		.attr("id", "municipalities")
+		.selectAll("path")
+		.data(topojson.feature(ma, ma.objects.ma).features)
+		.enter().append("path")
+		.attr("d", path)
+		.attr("fill", function (d) { if (municipalities.get(fix_id(d.id)) == null) { console.log(d.id); return yellow; } else return municipalities.get(fix_id(d.id)).rgo_color; })
+		.attr("class", "municipality")
+		.attr("id", function(d) { return "c" + fix_id(d.id); })
+		.on("click", reset)
+		.on("mouseleave", clear)
+		.on("mouseenter", hover);
+
+		g.append("g")
+		.attr("id", "municipalities")
+		.selectAll("path")
+		.data(topojson.feature(ri, ri.objects.ri).features)
+		.enter().append("path")
+		.attr("d", path)
+		.attr("fill", function (d) { if (municipalities.get(fix_id(d.id)) == null) { console.log(d.id); return yellow; } else return municipalities.get(fix_id(d.id)).rgo_color; })
+		.attr("class", "municipality")
+		.attr("id", function(d) { return "c" + fix_id(d.id); })
+		.on("click", reset)
+		.on("mouseleave", clear)
+		.on("mouseenter", hover);
+
+		g.append("g")
+		.attr("id", "municipalities")
+		.selectAll("path")
+		.data(topojson.feature(nh, nh.objects.nh).features)
+		.enter().append("path")
+		.attr("d", path)
+		.attr("fill", function (d) { if (municipalities.get(fix_id(d.id)) == null) { console.log(d.id); return yellow; } else return municipalities.get(fix_id(d.id)).rgo_color; })
+		.attr("class", "municipality")
+		.attr("id", function(d) { return "c" + fix_id(d.id); })
+		.on("click", reset)
+		.on("mouseleave", clear)
+		.on("mouseenter", hover);
+
+		g.append("g")
+		.attr("id", "municipalities")
+		.selectAll("path")
+		.data(topojson.feature(vt, vt.objects.vt).features)
+		.enter().append("path")
+		.attr("d", path)
+		.attr("fill", function (d) { if (municipalities.get(fix_id(d.id)) == null) { console.log(d.id); return yellow; } else return municipalities.get(fix_id(d.id)).rgo_color; })
+		.attr("class", "municipality")
+		.attr("id", function(d) { return "c" + fix_id(d.id); })
+		.on("click", reset)
+		.on("mouseleave", clear)
+		.on("mouseenter", hover);
+
+	}
+
+		function clear(d) {
+			hash = window.location.hash;
+			d3.select("#countyID").html("");
+			d3.select("#rgoID").html("");
+			d3.select("#msaID").html("");
+			d3.select("#popID").html("");
+			if (hash == "#RGO")
+				rgo.get(municipalities.get(fix_id(d.id)).rgo_code).forEach (
+					function(f) {
+						d3.select("#c" + f).attr("fill", municipalities.get(fix_id(d.id)).rgo_color);
+					}
+				);
+			if (hash == "#MSA")
+				msa.get(municipalities.get(fix_id(d.id)).msa_code).forEach (
+					function(f) {
+						d3.select("#c" + f).attr("fill", municipalities.get(d.id).msa_color);
+					}
+				);
+		}
+
+		function hover(d) {
+			hash = window.location.hash;
+			d3.select("#stateID").html(states.get(parseInt(fix_id(d.id).substring(0,2))));
+			console.log(fix_id(d.id).substring(0,2));
+			d3.select("#countyID").html(municipalities.get(fix_id(d.id)).municipality);
+			d3.select("#rgoID").html(municipalities.get(fix_id(d.id)).rgo_name);
+			d3.select("#msaID").html(municipalities.get(fix_id(d.id)).msa_name);
+			d3.select("#popID").html("");
+			if (hash == "#RGO")
+				rgo.get(municipalities.get(fix_id(d.id)).rgo_code).forEach (
+					function(f) {
+						d3.select("#c" + f).attr("fill", yellow);
+					}
+				);
+			if (hash == "#MSA")
+				msa.get(municipalities.get(d.id).msa_code).forEach (
+					function(f) {
+						d3.select("#c" + f).attr("fill", yellow);
+					}
+				);
+		}
+
+		function MSA() {
+			d3.selectAll(".municipality")
+			.attr("fill", function(d) {
+				if (municipalities.get(fix_id(d.id)) == null)
+					return yellow;
+				else
+					return municipalities.get(fix_id(d.id)).msa_color;
+			});
+
+		}
+
+		function RGO() {
+			d3.selectAll(".municipality")
+			.attr("fill", function(d) {
+				if (municipalities.get(fix_id(d.id)) == null)
+					return yellow;
+				else
+					return municipalities.get(fix_id(d.id)).rgo_color;
+			})
+		}
+
+		function fix_id(id) {
+			if (id < 10000)
+				return "0" + id;
+			else
+				return String(id);
+		}
+
+		function get_color(state, code) {
+			hue = colors.get(state);
+			if (code == 99 || code == 0)
+				return "hsla(0, 0%, 100%, 1.0)";
+			else if (code >= 75 && code <= 98)
+				return "hsla(0, 0%, 0%, 1.0)";
+			else if (code >= 50 && code <= 74)
+				return "hsla(0, 0%, 75%," + code/10 + ")";
+			else {
+				var a = 1.0 - code.substring(0, 1)/10;
+				var l = 80.0 - code.substring(1, 2)*5;
+				var s = 20.0 + code.substring(1, 2)*5;
+				return "hsla(" + hue + ", " + s + "%, " + l + "%, " + a +")";
+			}
+		}
+
+    function clicked(d) {
+	  if (this.id == "33" || this.id == "50" || this.id == "25" || this.id == "9" || this.id == "44") {
+		window.location = "http://www.pitt.edu/~frankeny/final/ne.html";
+		return;
+	  }
+	  else {
+			d3.select("#stateID").html(this.id)
+			if (active.node() === this) return reset();
+      active.classed("active", false);
+      active = d3.select(this).classed("active", true);
+
+      var bounds = path.bounds(d),
+          dx = bounds[1][0] - bounds[0][0],
+          dy = bounds[1][1] - bounds[0][1],
+          x = (bounds[0][0] + bounds[1][0]) / 2,
+          y = (bounds[0][1] + bounds[1][1]) / 2,
+          scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / width, dy / height))),
+          translate = [width / 2 - scale * x, height / 2 - scale * y];
+
+      svg.transition()
+          .duration(750)
+          .call(zoom.translate(translate).scale(scale).event);
+		}
+	}
+
+    function reset() {
+      active.classed("active", false);
+      active = d3.select(null);
+
+      svg.transition()
+          .duration(750)
+          .call(zoom.translate([0, 0]).scale(1).event);
+    }
+
+    function zoomed() {
+      g.style("stroke-width", 1.5 / d3.event.scale + "px");
+      g.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+    }
+
+    // If the drag behavior prevents the default click,
+    // also stop propagation so we don’t click-to-zoom.
+    function stopped() {
+      if (d3.event.defaultPrevented) d3.event.stopPropagation();
+    }
+
+
+
+
+		</script>
+	</body>
+</html>

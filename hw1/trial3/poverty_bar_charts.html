@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<meta charset="utf-8">
+
+<html>
+   <head>
+       
+       <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
+       
+       <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
+       
+      <title>United States Poverty Visualization</title>
+       
+      <style>
+         #introText {
+         font-family: 'Droid Sans', sans-serif;
+         width: 90%;
+         margin-top:2%;
+         margin-left: auto;
+         margin-right:auto;
+         text-align: center;
+         display: block;
+         }
+         #viewOptions {
+         font-family: 'Cabin', sans-serif;     
+         width: 30%;
+         margin-bottom: 2%;
+         margin-left: auto;
+         margin-right:auto;
+         text-align:left;
+         display: block;   
+         }
+
+         #visViewer {
+         width: 90%;
+         margin-left: auto;
+         margin-right: auto;
+         }
+         .axis text {
+         font: 10px sans-serif;
+         }
+         .axis path,
+         .axis line {
+         fill: none;
+         stroke: #000;
+         shape-rendering: crispEdges;
+         }
+         .bar {
+         fill-opacity: .9;
+         }
+         .x.axis path {
+         display: none;
+         }
+      </style>
+       
+   </head>
+    
+   <body>
+       
+      <div id="introText">
+         <h1>United States Poverty Data</h1>
+         <p>The percentage of each state's population that lives below the poverty line.</p>
+      </div>
+       
+      <div id="viewOptions" name="viewForm" onchange="updateView()">
+         <label for="year">Select Year</label>
+         <select id="year">
+            <option  value="2015" selected>2015</option>
+            <option value="2005">2005</option>
+            <option value="1995">1995</option>
+         </select>
+         <br/>
+         <label for="sorting">Sorting Method</label>
+         <select id="sorting" onchange="updateView()">
+            <option  value="alpha" selected>Alphabetical by State</option>
+            <option value="highestFirst">Highest to Lowest Poverty %</option>
+            <option value="lowestFirst">Lowest to Hightest Poverty %</option>
+         </select>
+         <br/>
+        
+      </div>
+       
+      <div id="visViewer">
+         <svg id="chart"></svg>
+      </div>
+       
+      <!-- Load d3.js library -->
+      <script src="http://d3js.org/d3.v3.min.js"></script>
+       
+    
+       
+      <script>  
+          
+         // Basic chart values             
+         var margin = {top: 0, right: 40, bottom: 30, left: 40},
+             width = 1000 - margin.left - margin.right,
+             height = 500 - margin.top - margin.bottom;    
+          
+        var tooltip = d3.select('body').append('div')
+            .style("position","absolute")
+            .style("background-color","#f4f4f4")
+            .style("padding","5 15px")
+            .style("border","1px #333 solid")
+            .style("border-radius","5px")
+            .style("opacity","0")
+          
+         var x = d3.scale.ordinal()
+             .rangeRoundBands([0, width], .1, 1);
+         
+         var y = d3.scale.linear()
+             .range([height, 0]);
+         
+         var formatPercent = d3.format(".0%");
+                     
+         var svg = d3.select("#visViewer").append("svg")
+             .attr("width", width + margin.left + margin.right)
+             .attr("height", height + margin.top + margin.bottom)
+           .append("g")
+             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                     
+         var xAxis = d3.svg.axis()
+             .scale(x)
+             .orient("bottom");
+         
+         var yAxis = d3.svg.axis()
+             .scale(y)
+             .orient("left")
+             .tickFormat(formatPercent)
+         
+         // Variable used to indicate if any charts have already been made
+         var firstRun = true;
+         
+         /* Chart rendering is wrapped in a function to allow vis
+         to be redrawn when the user selects a new year or sort option */
+                     
+         function updateView() {
+             
+             /* Check if this is the first time running the vis,
+             if so then change boolean indicator and continue
+             generating vis, otherwise erase previous chart.
+             */
+             if (firstRun) { 
+                 firstRun = false;
+             } else {
+                  svg.selectAll("*").remove();
+             }
+             
+             
+             // Assign correct data based on year selection dropdown
+             var dataSet = document.getElementById("year").value + "poverty.csv";
+             
+             // Create variable to help manage sorting
+             var sortingMethod = document.getElementById("sorting").value;
+             
+             
+         // Render chart
+        d3.csv(dataSet, function(error, data) {
+         
+           // Convert ingested data into integer        
+           data.forEach(function(d) {
+             d.percent = +d.percent / 100;
+           });
+             
+            data.sort(function(a,b) {
+                if (sortingMethod == "highestFirst"){
+                   return b.percent - a.percent;
+                } else if(sortingMethod == "lowestFirst"){
+                    return a.percent - b.percent;
+                } else if (sortingMethod == "alpha") {
+                    return a.abv - b.abv;
+                }
+                    
+            });
+             
+           
+            
+           // Generate X and Y axis     
+           x.domain(data.map(function(d) {return d.abv;}));
+           y.domain([0, d3.max(data, function(d) { return d.percent; })]);
+             
+           // Start building barchart
+            
+             // Render x-axis
+             svg.append("g")
+               .attr("class", "x axis")
+               .attr("transform", "translate(0," + height + ")")
+               .call(xAxis);
+           
+           // Render y-axis
+           svg.append("g")
+               .attr("class", "y axis")
+               .call(yAxis)
+             .append("text")
+               .attr("transform", "rotate(-90)")
+               .attr("y", 6)
+               .attr("dy", ".71em")
+               .style("text-anchor", "end")
+               .text("Percentage");
+          
+           // Create and color bars   
+           svg.selectAll(".bar")
+               .data(data)
+             .enter().append("rect")
+               .attr("class", "bar")
+               .attr("y", height)
+               .attr("height", 0) 
+               .attr("x", function(d) { return x(d.abv); })
+               .attr("width", x.rangeBand())
+               .attr("fill", function(d) {
+                     if(d.percent < .1) {
+                         return "#E59A99";
+                     } else if (d.percent < .12) {
+                         return "#B26766";
+                     } else if (d.percent < .15) {
+                         return "#7F3433";
+                     } else if (d.percent > .14) {
+                         return "#4C0100";
+                     }
+                 })
+               
+                .on("mouseover", function(d) {
+                    tooltip.transition()
+                        .style("opacity", 1)
+                    tooltip.html(d.state + '<br>'
+                                + 'Poverty %: ' + (d.percent*100).toFixed(2) + "%<br><br>" + 'Total Pop.: ' + d.total
+                                + '000<br>' + "Poverty Pop.: " + d.number + "000")
+                        .style('left', (d3.event.pageX) + 'px')
+                        .style('top', (d3.event.pageY) + 'px')
+                    d3.select(this).style('opacity', 0.5)
+                  })
+                  .on("mouseout", function(d) {
+                        tooltip.transition()
+                            .style('opacity', 0)
+                        d3.select(this).style('opacity', 1)
+                    })
+                    .transition()
+                        .duration(700)
+                        .ease("linear")
+                        .attr("height", function(d) { return height - y(d.percent); })
+                        .attr("y", function(d) { return y(d.percent); }) ;
+             
+         }); // End of chart rendering operations
+		 
+           
+             
+
+                
+      } // End of update view function 
+          
+      
+       window.onload=updateView();
+          
+        /*
+        Citations and sources:
+        
+        A pretty significant portion of the code comes from 
+        Mike Bostock's Sortable Bar Chart available at:
+        https://bl.ocks.org/mbostock/3885705
+        
+        Additional help with animations was found at:
+        https://gist.github.com/yoavniran/7f1966ce5c79e3cf29f0
+        
+        General D3 help was supplied by:
+        http://eyeseast.github.io/visible-data/2013/08/28/responsive-charts-with-d3/
+        
+        as well as YouTube D3 tutorials from Traversy Medias account:
+        https://www.youtube.com/channel/UC29ju8bIPH5as8OGnQzwJyA
+        
+        
+        */
+          
+      </script>
+   </body>
+</html>

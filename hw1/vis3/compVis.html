@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>U.S. Composite Poverty Data</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+      
+    <script src="//cdnjs.cloudflare.com/ajax/libs/d3-legend/1.1.0/d3-legend.js"></script>
+      
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+      
+	<link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
+       
+       <link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
+	  
+    <style>
+	
+	  #introText {
+         font-family: 'Droid Sans', sans-serif;
+         width: 90%;
+         margin-top:2%;
+         margin-left: auto;
+         margin-right:auto;
+         text-align: center;
+         display: block;
+         }
+         #viewOptions {
+         font-family: 'Cabin', sans-serif;     
+         width: 30%;
+         margin-bottom: 2%;
+         margin-left: auto;
+         margin-right:auto;
+         text-align:left;
+         display: block;   
+         }
+		 
+		select {
+			padding: 5px;
+			text-align: center;
+			margin-left: 10px;
+		}
+	
+
+
+
+      .chart-line {
+        fill: none;
+        stroke-width: 1.5px;
+      }
+    
+      .axis text {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 10pt;
+      }
+      .axis .label {
+        font-size: 18pt;
+      }
+
+      .axis path, .axis line {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+      }
+
+      .color-legend text {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 12pt;
+      }
+        
+
+
+    </style>
+      
+  </head>
+    
+  <body>
+  
+  <div id="introText">
+         <h1>U.S. Composite Poverty Data</h1>
+         <p>Compare national racial poverty data and individual state poverty averages across all demographics.</p>
+      </div>
+      
+    <div id="viewOptions" name="viewForm" onchange="updateView()">
+        
+        <label for="state">Select State</label>
+        <select id="state">
+			<option  value="noState" >No State  Data Selected</option>
+			<option  value="allState" selected>View All State  Data</option>
+			<option value="AL">Alabama</option>
+			<option value="AK"  >Alaska</option>
+			<option value="AZ">Arizona</option>
+			<option value="AR">Arkansas</option>
+			<option value="CA">California</option>
+			<option value="CO">Colorado</option>
+			<option value="CT">Connecticut</option>
+			<option value="DE">Delaware</option>
+			<option value="DC">District of Columbia</option>
+			<option value="FL">Florida</option>
+			<option value="GA">Georgia</option>
+			<option value="HI">Hawaii</option>
+			<option value="ID">Idaho</option>
+			<option value="IL">Illinois</option>
+			<option value="IN">Indiana</option>
+			<option value="IA">Iowa</option>
+			<option value="KS">Kansas</option>
+			<option value="KY">Kentucky</option>
+			<option value="LA">Louisiana</option>
+			<option value="ME">Maine</option>
+			<option value="MD">Maryland</option>
+			<option value="MA">Massachusetts</option>
+			<option value="MI">Michigan</option>
+			<option value="MN">Minnesota</option>
+			<option value="MS">Mississippi</option>
+			<option value="MO">Missouri</option>
+			<option value="MT">Montana</option>
+			<option value="NE">Nebraska</option>
+			<option value="NV">Nevada</option>
+			<option value="NH">New Hampshire</option>
+			<option value="NJ">New Jersey</option>
+			<option value="NM">New Mexico</option>
+			<option value="NY">New York</option>
+			<option value="NC">North Carolina</option>
+			<option value="ND">North Dakota</option>
+			<option value="OH">Ohio</option>
+			<option value="OK">Oklahoma</option>
+			<option value="OR">Oregon</option>
+			<option value="PA">Pennsylvania</option>
+			<option value="RI">Rhode Island</option>
+			<option value="SC">South Carolina</option>
+			<option value="SD">South Dakota</option>
+			<option value="TN">Tennessee</option>
+			<option value="TX">Texas</option>
+			<option value="UT">Utah</option>
+			<option value="VT">Vermont</option>
+			<option value="VA">Virginia</option>
+			<option value="WA">Washington</option>
+			<option value="WV">West Virginia</option>
+			<option value="WI">Wisconsin</option>
+			<option value="WY">Wyoming</option>
+        </select>
+		
+		<br>
+		<label for="year">Select Demographic Category</label>
+		<select id="race">
+            <option  value="noRace" selected>No Race Data Selected</option>
+            <optgroup label="Current Demographic Categories">
+                <option value="asianAlone">Asian Alone</option>
+                <option value="asianCombo">Asian Alone or in Combination</option>
+                <option value="blackCombo">Black Alone or in Combination</option>
+                <option value="blackAlone">Black Alone</option>
+                <option value="hispanic">Hispanic (any race)</option>
+                <option value="whiteAlone">White Alone</option>
+                <option value="whiteANH">White Alone, not Hispanic</option>
+            </optgroup>    
+            <optgroup label="Discontinued Categories">  
+                <option value="asianPI">Asian & Pacific Islander</option>
+                <option value="black">Black</option>
+                <option value="white">White</option>
+                <option value="whiteNH">White Not Hispanic</option>
+            </optgroup>       
+        </select>
+		
+        
+    </div>  
+      
+    <script>
+       
+
+        
+      // Set image dimensions    
+      var outerWidth = 1500;
+      var outerHeight = 1500;
+      var margin = { left: 150, top: 100, right: 500, bottom: 600 };
+        
+      // Create variables for svg manipulation    
+      var xColumn = "year";
+      var yColumn = "povPercent";
+      var colorColumn = "state";
+        
+      
+    
+      var lineColumn = colorColumn;
+
+      // Label X-Axis
+      var xAxisLabelText = "Year";
+      var xAxisLabelOffset = 48;
+
+      // Label Y-Axis
+      var yAxisLabelText = "Percent (%)";
+      var yAxisLabelOffset = 60;
+
+      // Readjust rendering area to account for margins    
+      var innerWidth  = outerWidth  - margin.left - margin.right;
+      var innerHeight = outerHeight - margin.top  - margin.bottom;
+
+      // Build svg        
+      var svg = d3.select("body").append("svg")
+        .attr("width", outerWidth)
+        .attr("height", outerHeight);
+      var g = svg.append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+      var xAxisG = g.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + innerHeight + ")")
+      var xAxisLabel = xAxisG.append("text")
+        .style("text-anchor", "middle")
+        .attr("transform", "translate(" + (innerWidth / 2) + "," + xAxisLabelOffset + ")")
+        .attr("class", "label")
+        .text(xAxisLabelText);
+
+      var yAxisG = g.append("g")
+        .attr("class", "y axis");
+      var yAxisLabel = yAxisG.append("text")
+        .style("text-anchor", "middle")
+        .attr("transform", "translate(-" + yAxisLabelOffset + "," + (innerHeight / 2) + ") rotate(-90)")
+        .attr("class", "label")
+        .text(yAxisLabelText);
+
+      var colorLegendG = g.append("g")
+        .attr("class", "color-legend")
+        .attr("transform", "translate(1000, 20)");
+
+      var xScale = d3.time.scale().range([0, innerWidth]);
+      var yScale = d3.scale.linear().range([innerHeight, 0]);
+      var colorScale = d3.scale.category20b();
+	  
+
+      var xAxis = d3.svg.axis().scale(xScale).orient("bottom")
+        .tickFormat(d3.format("d"))
+		.ticks(10)
+        .outerTickSize(0);
+      var yAxis = d3.svg.axis().scale(yScale).orient("left")
+        .ticks(5)
+        .outerTickSize(0);
+
+      var line = d3.svg.line()
+        .x(function(d) { return xScale(d[xColumn]); })
+        .y(function(d) { return yScale(d[yColumn]); });
+
+      var colorLegend = d3.legend.color()
+        .scale(colorScale)
+        .shapePadding(3)
+        .shapeWidth(15)
+        .shapeHeight(15)
+        .labelOffset(4);
+
+
+		var stateView = document.getElementById("state").value;
+		var raceSelect = document.getElementById("race").value;
+		
+		var tooltip = d3.select('body').append('div')
+            .style("position","absolute")
+            .style("background-color","#f4f4f4")
+            .style("padding","5 15px")
+            .style("border","1px #333 solid")
+            .style("border-radius","5px")
+            .style("opacity","0")
+        
+      function render(data){
+
+        xScale.domain(d3.extent(data, function (d){ return d[xColumn]; }));
+        yScale.domain([0, 30]);
+
+        
+          
+        xAxisG.call(xAxis);
+        yAxisG.call(yAxis); 
+		
+
+		
+		// State Data Handeling
+           
+         
+          
+         if (stateView == "noState") {
+          
+         } else if (stateView == "allState") { 
+             
+               // Create nested data object to hold state year values  
+                var nested = d3.nest()
+                    .key(function (d){ 
+                    return d[lineColumn];
+                })
+                .entries(data);
+            
+             colorScale.domain(nested.map(function (d){ return d.key; }));  
+
+                var paths = g.selectAll(".chart-line").data(nested);
+				console.log(nested);
+                paths.enter().append("path").attr("class", "chart-line");
+                paths.exit().remove();
+                paths
+                  .attr("d", function (d){ return line(d.values); })
+                  .attr("stroke", function (d){ return colorScale(d.key); });
+
+            colorLegendG.call(colorLegend);
+             
+         } else  if ( stateView != "noState" && stateView != "allState") {
+             
+             d3.csv("statePovData.csv")
+                 .row(function(d){ 
+                    if (d.abv == stateView){
+                        return {year: +d.year, povPercent: +d.povPercent}
+					
+                    }
+                 })
+                   .get(function(error, data) {
+                        var stateLine = d3.svg.line()
+                            .x(function(d){return x(d.year);})
+                            .y(function(d){return y(d.povPercent);});
+                 
+					g.append("path").attr("d",line(data))
+					.style("stroke-dasharray", "5,5")
+					.style("stroke-linecap", "round")
+                    .style("stroke", "red")
+                    .style("stroke-width", "4px")
+                    .style("fill", "none");
+					})
+         }
+		 
+          //Race Data Handeling
+		  
+		  
+          
+		  if (raceSelect != "noRace") {
+			
+			d3.csv("racePovData.csv")
+                 .row(function(d){ 
+                    if (d.race == raceSelect){
+                        return {year: +d.year, povPercent: +d.percentage}
+                    }
+                 })
+                   .get(function(error, data) {
+                        var raceArea = d3.svg.line()
+                            .x(function(d){return x(d.year);})
+                            .y(function(d){return y(d.percentage);});
+                 
+					g.append("path")
+						.attr("d", line(data))
+						.style("stroke", "#1086EE")
+						.style("stroke-width", "4px")
+						.style("fill", "none");
+					})
+			
+		  }
+		  
+
+      }
+	  
+       
+ var firstRun = true;        
+        
+function updateView(){  
+    
+    stateView = document.getElementById("state").value;
+	raceSelect = document.getElementById("race").value;
+	
+    
+	d3.selectAll("path").remove();
+   
+         
+      d3.csv("statePovData.csv", render);
+    
+    } 
+    
+        window.onload=updateView();
+		
+		/* Code Sources and Refrences
+		
+		Much of this code was built from the following tutorial:
+			http://curran.github.io/screencasts/splittingCharts/examples/
+			
+		As well as lessons from: https://www.lynda.com/D3-js-tutorials
+		
+
+		*/
+        
+    </script>
+  </body>
+</html>

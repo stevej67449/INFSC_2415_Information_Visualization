@@ -1,0 +1,410 @@
+[
+ {
+   "STATE": "Alabama",
+   "Total": "4,820",
+   "Number": "784",
+   "Standard\nerror": 60,
+   "Percent": 16.3,
+   "Standard\nerror": 1.2
+ },
+ {
+   "STATE": "Alaska",
+   "Total": "703",
+   "Number": "65",
+   "Standard\nerror": 6,
+   "Percent": 9.2,
+   "Standard\nerror": 0.9
+ },
+ {
+   "STATE": "Arizona",
+   "Total": "6,728",
+   "Number": "1,156",
+   "Standard\nerror": 84,
+   "Percent": 17.2,
+   "Standard\nerror": 1.3
+ },
+ {
+   "STATE": "Arkansas",
+   "Total": "2,951",
+   "Number": "475",
+   "Standard\nerror": 27,
+   "Percent": 16.1,
+   "Standard\nerror": 0.9
+ },
+ {
+   "STATE": "California",
+   "Total": "39,081",
+   "Number": "5,441",
+   "Standard\nerror": 211,
+   "Percent": 13.9,
+   "Standard\nerror": 0.5
+ },
+ {
+   "STATE": "Colorado",
+   "Total": "5,420",
+   "Number": "538",
+   "Standard\nerror": 69,
+   "Percent": 9.9,
+   "Standard\nerror": 1.3
+ },
+ {
+   "STATE": "Connecticut",
+   "Total": "3,572",
+   "Number": "324",
+   "Standard\nerror": 43,
+   "Percent": 9.1,
+   "Standard\nerror": 1.2
+ },
+ {
+   "STATE": "Delaware",
+   "Total": "958",
+   "Number": "106",
+   "Standard\nerror": 12,
+   "Percent": 11.1,
+   "Standard\nerror": 1.2
+ },
+ {
+   "STATE": "District of Columbia",
+   "Total": "676",
+   "Number": "113",
+   "Standard\nerror": 8,
+   "Percent": 16.6,
+   "Standard\nerror": 1.2
+ },
+ {
+   "STATE": "Florida",
+   "Total": "20,071",
+   "Number": "3,253",
+   "Standard\nerror": 176,
+   "Percent": 16.2,
+   "Standard\nerror": 0.9
+ },
+ {
+   "STATE": "Georgia",
+   "Total": "10,100",
+   "Number": "1,833",
+   "Standard\nerror": 111,
+   "Percent": 18.1,
+   "Standard\nerror": 1.1
+ },
+ {
+   "STATE": "Hawaii",
+   "Total": "1,382",
+   "Number": "151",
+   "Standard\nerror": 16,
+   "Percent": 10.9,
+   "Standard\nerror": 1.1
+ },
+ {
+   "STATE": "Idaho",
+   "Total": "1,657",
+   "Number": "204",
+   "Standard\nerror": 21,
+   "Percent": 12.3,
+   "Standard\nerror": 1.3
+ },
+ {
+   "STATE": "Illinois",
+   "Total": "12,683",
+   "Number": "1,380",
+   "Standard\nerror": 104,
+   "Percent": 10.9,
+   "Standard\nerror": 0.8
+ },
+ {
+   "STATE": "Indiana",
+   "Total": "6,502",
+   "Number": "880",
+   "Standard\nerror": 72,
+   "Percent": 13.5,
+   "Standard\nerror": 1.1
+ },
+ {
+   "STATE": "Iowa",
+   "Total": "3,100",
+   "Number": "321",
+   "Standard\nerror": 39,
+   "Percent": 10.4,
+   "Standard\nerror": 1.3
+ },
+ {
+   "STATE": "Kansas",
+   "Total": "2,849",
+   "Number": "404",
+   "Standard\nerror": 42,
+   "Percent": 14.2,
+   "Standard\nerror": 1.5
+ },
+ {
+   "STATE": "Kentucky",
+   "Total": "4,365",
+   "Number": "851",
+   "Standard\nerror": 57,
+   "Percent": 19.5,
+   "Standard\nerror": 1.3
+ },
+ {
+   "STATE": "Louisiana",
+   "Total": "4,599",
+   "Number": "854",
+   "Standard\nerror": 57,
+   "Percent": 18.6,
+   "Standard\nerror": 1.2
+ },
+ {
+   "STATE": "Maine",
+   "Total": "1,340",
+   "Number": "165",
+   "Standard\nerror": 20,
+   "Percent": 12.3,
+   "Standard\nerror": 1.5
+ },
+ {
+   "STATE": "Maryland",
+   "Total": "5,892",
+   "Number": "566",
+   "Standard\nerror": 70,
+   "Percent": 9.6,
+   "Standard\nerror": 1.2
+ },
+ {
+   "STATE": "Massachusetts",
+   "Total": "6,777",
+   "Number": "782",
+   "Standard\nerror": 65,
+   "Percent": 11.5,
+   "Standard\nerror": 1
+ },
+ {
+   "STATE": "Michigan",
+   "Total": "9,852",
+   "Number": "1,259",
+   "Standard\nerror": 98,
+   "Percent": 12.8,
+   "Standard\nerror": 1
+ },
+ {
+   "STATE": "Minnesota",
+   "Total": "5,458",
+   "Number": "428",
+   "Standard\nerror": 58,
+   "Percent": 7.8,
+   "Standard\nerror": 1.1
+ },
+ {
+   "STATE": "Mississippi",
+   "Total": "2,947",
+   "Number": "563",
+   "Standard\nerror": 33,
+   "Percent": 19.1,
+   "Standard\nerror": 1.1
+ },
+ {
+   "STATE": "Missouri",
+   "Total": "5,946",
+   "Number": "582",
+   "Standard\nerror": 71,
+   "Percent": 9.8,
+   "Standard\nerror": 1.2
+ },
+ {
+   "STATE": "Montana",
+   "Total": "1,018",
+   "Number": "121",
+   "Standard\nerror": 12,
+   "Percent": 11.9,
+   "Standard\nerror": 1.2
+ },
+ {
+   "STATE": "Nebraska",
+   "Total": "1,858",
+   "Number": "192",
+   "Standard\nerror": 18,
+   "Percent": 10.3,
+   "Standard\nerror": 1
+ },
+ {
+   "STATE": "Nevada",
+   "Total": "2,864",
+   "Number": "371",
+   "Standard\nerror": 36,
+   "Percent": 13,
+   "Standard\nerror": 1.3
+ },
+ {
+   "STATE": "New Hampshire",
+   "Total": "1,293",
+   "Number": "94",
+   "Standard\nerror": 13,
+   "Percent": 7.3,
+   "Standard\nerror": 1
+ },
+ {
+   "STATE": "New Jersey",
+   "Total": "8,936",
+   "Number": "1,004",
+   "Standard\nerror": 95,
+   "Percent": 11.2,
+   "Standard\nerror": 1.1
+ },
+ {
+   "STATE": "New Mexico",
+   "Total": "2,036",
+   "Number": "400",
+   "Standard\nerror": 28,
+   "Percent": 19.7,
+   "Standard\nerror": 1.4
+ },
+ {
+   "STATE": "New York",
+   "Total": "19,645",
+   "Number": "2,791",
+   "Standard\nerror": 156,
+   "Percent": 14.2,
+   "Standard\nerror": 0.8
+ },
+ {
+   "STATE": "North Carolina",
+   "Total": "9,887",
+   "Number": "1,509",
+   "Standard\nerror": 95,
+   "Percent": 15.3,
+   "Standard\nerror": 1
+ },
+ {
+   "STATE": "North Dakota",
+   "Total": "763",
+   "Number": "82",
+   "Standard\nerror": 12,
+   "Percent": 10.7,
+   "Standard\nerror": 1.5
+ },
+ {
+   "STATE": "Ohio",
+   "Total": "11,435",
+   "Number": "1,550",
+   "Standard\nerror": 105,
+   "Percent": 13.6,
+   "Standard\nerror": 0.9
+ },
+ {
+   "STATE": "Oklahoma",
+   "Total": "3,887",
+   "Number": "551",
+   "Standard\nerror": 45,
+   "Percent": 14.2,
+   "Standard\nerror": 1.1
+ },
+ {
+   "STATE": "Oregon",
+   "Total": "4,029",
+   "Number": "478",
+   "Standard\nerror": 69,
+   "Percent": 11.9,
+   "Standard\nerror": 1.7
+ },
+ {
+   "STATE": "Pennsylvania",
+   "Total": "12,564",
+   "Number": "1,542",
+   "Standard\nerror": 107,
+   "Percent": 12.3,
+   "Standard\nerror": 0.9
+ },
+ {
+   "STATE": "Rhode Island",
+   "Total": "1,044",
+   "Number": "123",
+   "Standard\nerror": 16,
+   "Percent": 11.8,
+   "Standard\nerror": 1.5
+ },
+ {
+   "STATE": "South Carolina",
+   "Total": "4,790",
+   "Number": "683",
+   "Standard\nerror": 56,
+   "Percent": 14.3,
+   "Standard\nerror": 1.2
+ },
+ {
+   "STATE": "South Dakota",
+   "Total": "848",
+   "Number": "118",
+   "Standard\nerror": 10,
+   "Percent": 13.9,
+   "Standard\nerror": 1.2
+ },
+ {
+   "STATE": "Tennessee",
+   "Total": "6,605",
+   "Number": "973",
+   "Standard\nerror": 70,
+   "Percent": 14.7,
+   "Standard\nerror": 1.1
+ },
+ {
+   "STATE": "Texas",
+   "Total": "27,396",
+   "Number": "4,036",
+   "Standard\nerror": 207,
+   "Percent": 14.7,
+   "Standard\nerror": 0.8
+ },
+ {
+   "STATE": "Utah",
+   "Total": "3,004",
+   "Number": "279",
+   "Standard\nerror": 30,
+   "Percent": 9.3,
+   "Standard\nerror": 1
+ },
+ {
+   "STATE": "Vermont",
+   "Total": "609",
+   "Number": "65",
+   "Standard\nerror": 8,
+   "Percent": 10.7,
+   "Standard\nerror": 1.3
+ },
+ {
+   "STATE": "Virginia",
+   "Total": "8,216",
+   "Number": "894",
+   "Standard\nerror": 81,
+   "Percent": 10.9,
+   "Standard\nerror": 1
+ },
+ {
+   "STATE": "Washington",
+   "Total": "7,193",
+   "Number": "819",
+   "Standard\nerror": 54,
+   "Percent": 11.4,
+   "Standard\nerror": 0.8
+ },
+ {
+   "STATE": "West Virginia",
+   "Total": "1,795",
+   "Number": "261",
+   "Standard\nerror": 46,
+   "Percent": 14.5,
+   "Standard\nerror": 2.6
+ },
+ {
+   "STATE": "Wisconsin",
+   "Total": "5,736",
+   "Number": "654",
+   "Standard\nerror": 68,
+   "Percent": 11.4,
+   "Standard\nerror": 1.2
+ },
+ {
+   "STATE": "Wyoming",
+   "Total": "574",
+   "Number": "56",
+   "Standard\nerror": 8,
+   "Percent": 9.8,
+   "Standard\nerror": 1.4
+ }
+]

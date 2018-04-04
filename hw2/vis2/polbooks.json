@@ -1,0 +1,703 @@
+[{
+		"name": "1",
+		"title": "Bush vs. the Beltway",
+		"group": "c",
+		"size": 4,
+		"imports": ["0"]
+	},
+	{
+		"name": "2",
+		"title": "Charlie Wilsons War",
+		"group": "c",
+		"size": 4,
+		"imports": ["0"]
+	},
+	{
+		"name": "3",
+		"title": "Losing Bin Laden",
+		"group": "c",
+		"size": 23,
+		"imports": ["0", "1"]
+	}, {
+		"name": "77",
+		"title": "Bush at War",
+		"group": "c",
+		"size": 7,
+		"imports": ["19", "30", "31", "58", "71", "75", "76"]
+	},
+	{
+		"name": "5",
+		"title": "The Man Who Warned America",
+		"group": "c",
+		"size": 7,
+		"imports": ["0", "1", "2", "3", "4"]
+	},
+	{
+		"name": "8",
+		"title": "A National Party No More",
+		"group": "c",
+		"size": 25,
+		"imports": ["3"]
+	},
+	{
+		"name": "9",
+		"title": "Bush Country",
+		"group": "c",
+		"size": 16,
+		"imports": ["3", "8"]
+	},
+	{
+		"name": "10",
+		"title": "Dereliction of Duty",
+		"group": "c",
+		"size": 15,
+		"imports": ["3", "6", "8"]
+	},
+	{
+		"name": "11",
+		"title": "Legacy",
+		"group": "c",
+		"size": 18,
+		"imports": ["3", "8", "9", "10"]
+	},
+	{
+		"name": "12",
+		"title": "Off with Their Heads",
+		"group": "c",
+		"size": 25,
+		"imports": ["3", "6", "8", "9", "10", "11"]
+	},
+	{
+		"name": "13",
+		"title": "Persecution",
+		"group": "c",
+		"size": 13,
+		"imports": ["3", "8", "11", "12"]
+	},
+	{
+		"name": "14",
+		"title": "Rumsfelds War",
+		"group": "c",
+		"size": 9,
+		"imports": ["3", "7", "8", "9", "11", "12"]
+	},
+	{
+		"name": "15",
+		"title": "Breakdown",
+		"group": "c",
+		"size": 5,
+		"imports": ["3", "10", "12"]
+	},
+	{
+		"name": "16",
+		"title": "Betrayal",
+		"group": "c",
+		"size": 3,
+		"imports": ["3", "10", "15"]
+	},
+	{
+		"name": "17",
+		"title": "Shut Up and Sing",
+		"group": "c",
+		"size": 5,
+		"imports": ["3", "11", "12", "13"]
+	},
+	{
+		"name": "19",
+		"title": "The Right Man",
+		"group": "c",
+		"size": 5,
+		"imports": ["3", "10"]
+	},
+	{
+		"name": "20",
+		"title": "Ten Minutes from Normal",
+		"group": "c",
+		"size": 10,
+		"imports": ["3", "8", "9", "11"]
+	},
+	{
+		"name": "21",
+		"title": "Hillarys Scheme",
+		"group": "c",
+		"size": 5,
+		"imports": ["3", "8", "10", "11"]
+	},
+	{
+		"name": "22",
+		"title": "The French Betrayal of America",
+		"group": "c",
+		"size": 7,
+		"imports": ["3", "6", "8", "11"]
+	},
+	{
+		"name": "23",
+		"title": "Tales from the Left Coast",
+		"group": "c",
+		"size": 9,
+		"imports": ["3", "8", "12", "21"]
+	},
+	{
+		"name": "24",
+		"title": "Hating America",
+		"group": "c",
+		"size": 9,
+		"imports": ["3", "8", "9", "12", "20"]
+	},
+	{
+		"name": "25",
+		"title": "The Third Terrorist",
+		"group": "c",
+		"size": 5,
+		"imports": ["3", "6", "14", "22"]
+	},
+	{
+		"name": "26",
+		"title": "Endgame",
+		"group": "c",
+		"size": 9,
+		"imports": ["3", "8", "11", "14", "24"]
+	},
+	{
+		"name": "27",
+		"title": "Spin Sisters",
+		"group": "c",
+		"size": 9,
+		"imports": ["3", "8", "9", "11", "23"]
+	},
+	{
+		"name": "29",
+		"title": "Dangerous Dimplomacy",
+		"group": "c",
+		"size": 4,
+		"imports": ["4", "6", "11", "13"]
+	},
+	{
+		"name": "32",
+		"title": "The Death of Right and Wrong",
+		"group": "c",
+		"size": 5,
+		"imports": ["8", "12", "13", "23"]
+	},
+	{
+		"name": "33",
+		"title": "Useful Idiots",
+		"group": "c",
+		"size": 9,
+		"imports": ["8", "10", "12", "23", "32"]
+	},
+	{
+		"name": "34",
+		"title": "The OReilly Factor",
+		"group": "c",
+		"size": 5,
+		"imports": []
+	},
+	{
+		"name": "35",
+		"title": "Let Freedom Ring",
+		"group": "c",
+		"size": 10,
+		"imports": ["8", "10", "34"]
+	},
+	{
+		"name": "36",
+		"title": "Those Who Trespass",
+		"group": "c",
+		"size": 5,
+		"imports": ["12", "34", "35"]
+	},
+	{
+		"name": "37",
+		"title": "Bias",
+		"group": "c",
+		"size": 7,
+		"imports": ["8", "10", "33", "34", "35"]
+	},
+	{
+		"name": "38",
+		"title": "Slander",
+		"group": "c",
+		"size": 7,
+		"imports": ["10", "12", "33", "34", "35", "37"]
+	},
+	{
+		"name": "39",
+		"title": "The Savage Nation",
+		"group": "c",
+		"size": 8,
+		"imports": ["10", "12", "33", "34", "35", "38"]
+	},
+	{
+		"name": "40",
+		"title": "Deliver Us from Evil",
+		"group": "c",
+		"size": 18,
+		"imports": ["8", "12", "13", "20", "22", "24", "25", "26", "27", "35", "39"]
+	},
+	{
+		"name": "41",
+		"title": "Give Me a Break",
+		"group": "c",
+		"size": 8,
+		"imports": ["8", "9", "12", "27", "36", "40"]
+	},
+	{
+		"name": "42",
+		"title": "The Enemy Within",
+		"group": "c",
+		"size": 6,
+		"imports": ["8", "13", "39", "40"]
+	},
+	{
+		"name": "43",
+		"title": "The Real America",
+		"group": "c",
+		"size": 5,
+		"imports": ["8", "13", "35", "42"]
+	},
+	{
+		"name": "44",
+		"title": "Whos Looking Out for You?",
+		"group": "c",
+		"size": 5,
+		"imports": ["8", "12", "13", "35", "40"]
+	},
+	{
+		"name": "45",
+		"title": "The Official Handbook Vast Right Wing Conspiracy",
+		"group": "c",
+		"size": 6,
+		"imports": ["8", "9", "11", "26", "40"]
+	},
+	{
+		"name": "47",
+		"title": "Arrogance",
+		"group": "c",
+		"size": 18,
+		"imports": ["9", "11", "12", "13", "17", "23", "24", "26", "27", "33", "36", "37", "40", "41", "42", "45", "46"]
+	},
+	{
+		"name": "49",
+		"title": "The Bushes",
+		"group": "c",
+		"size": 8,
+		"imports": ["9", "20", "31", "48"]
+	},
+	{
+		"name": "50",
+		"title": "Things Worth Fighting For",
+		"group": "c",
+		"size": 3,
+		"imports": ["9", "11"]
+	}, {
+		"name": "52",
+		"title": "Allies",
+		"group": "c",
+		"size": 5,
+		"imports": ["9", "22", "51"]
+	}, {
+		"name": "53",
+		"title": "Why Courage Matters",
+		"group": "c",
+		"size": 5,
+		"imports": ["20", "24", "26", "40"]
+	}, {
+		"name": "54",
+		"title": "Hollywood Interrupted",
+		"group": "c",
+		"size": 6,
+		"imports": ["12", "23", "27", "40", "41", "47"]
+	}, {
+		"name": "55",
+		"title": "Fighting Back",
+		"group": "c",
+		"size": 4,
+		"imports": ["10", "12", "15", "19"]
+	}, {
+		"name": "56",
+		"title": "We Will Prevail",
+		"group": "c",
+		"size": 4,
+		"imports": ["11", "19", "43"]
+	}, {
+		"name": "57",
+		"title": "The Faith of George W Bush",
+		"group": "c",
+		"size": 5,
+		"imports": ["13", "20", "48", "49", "56"]
+	}, {
+		"name": "58",
+		"title": "Rise of the Vulcans",
+		"group": "c",
+		"size": 13,
+		"imports": ["7", "14", "30", "49", "50", "51", "52"]
+	}, {
+		"name": "59",
+		"title": "Downsize This!",
+		"group": "l",
+		"size": 5,
+		"imports": []
+	}, {
+		"name": "60",
+		"title": "Stupid White Men",
+		"group": "l",
+		"size": 6,
+		"imports": ["59"]
+	}, {
+		"name": "61",
+		"title": "Rush Limbaugh Is a Big Fat Idiot",
+		"group": "l",
+		"size": 4,
+		"imports": ["59"]
+	}, {
+		"name": "62",
+		"title": "The Best Democracy Money Can Buy",
+		"group": "l",
+		"size": 6,
+		"imports": ["59", "60"]
+	}, {
+		"name": "63",
+		"title": "The Culture of Fear",
+		"group": "l",
+		"size": 4,
+		"imports": ["59", "60", "62"]
+	}, {
+		"name": "64",
+		"title": "America Unbound",
+		"group": "l",
+		"size": 9,
+		"imports": ["51", "52", "58"]
+	}, {
+		"name": "65",
+		"title": "The Choice",
+		"group": "l",
+		"size": 7,
+		"imports": ["51", "58", "64"]
+	}, {
+		"name": "66",
+		"title": "The Great Unraveling",
+		"group": "l",
+		"size": 21,
+		"imports": ["28", "30", "64"]
+	}, {
+		"name": "67",
+		"title": "Rogue Nation",
+		"group": "l",
+		"size": 6,
+		"imports": ["30", "64", "65", "66"]
+	}, {
+		"name": "68",
+		"title": "Soft Power",
+		"group": "l",
+		"size": 4,
+		"imports": ["58", "64", "65"]
+	}, {
+		"name": "70",
+		"title": "The Sorrows of Empire",
+		"group": "l",
+		"size": 7,
+		"imports": ["30", "64", "66"]
+	}, {
+		"name": "71",
+		"title": "Against All Enemies",
+		"group": "l",
+		"size": 15,
+		"imports": ["7", "68", "70"]
+	}, {
+		"name": "72",
+		"title": "American Dynasty",
+		"group": "l",
+		"size": 22,
+		"imports": ["28", "49", "66", "70", "71"]
+	}, {
+		"name": "73",
+		"title": "Big Lies",
+		"group": "l",
+		"size": 21,
+		"imports": ["30", "31", "66", "71", "72"]
+	}, {
+		"name": "74",
+		"title": "The Lies of George W. Bush",
+		"group": "l",
+		"size": 16,
+		"imports": ["30", "31", "66", "71", "72", "73"]
+	}, {
+		"name": "75",
+		"title": "Worse Than Watergate",
+		"group": "l",
+		"size": 16,
+		"imports": ["30", "31", "70", "71", "72", "73", "74"]
+	}, {
+		"name": "78",
+		"title": "The New Pearl Harbor",
+		"group": "l",
+		"size": 5,
+		"imports": ["31", "71", "72", "74", "75"]
+	}, {
+		"name": "79",
+		"title": "Bushwomen",
+		"group": "l",
+		"size": 8,
+		"imports": ["30", "71", "72", "74", "75"]
+	}, {
+		"name": "80",
+		"title": "The Bubble of American Supremacy",
+		"group": "l",
+		"size": 4,
+		"imports": ["30", "66", "71", "72"]
+	}, {
+		"name": "81",
+		"title": "Living History",
+		"group": "l",
+		"size": 4,
+		"imports": ["71"]
+	}, {
+		"name": "82",
+		"title": "The Politics of Truth",
+		"group": "l",
+		"size": 9,
+		"imports": ["30", "31", "71", "72", "73", "74", "75", "76"]
+	}, {
+		"name": "83",
+		"title": "Fanatics and Fools",
+		"group": "l",
+		"size": 8,
+		"imports": ["30", "71", "73", "75", "76"]
+	}, {
+		"name": "84",
+		"title": "Bushwhacked",
+		"group": "l",
+		"size": 23,
+		"imports": ["30", "60", "62", "66", "72", "73", "74", "75", "76", "79", "81", "82", "83"]
+	}, {
+		"name": "85",
+		"title": "Disarming Iraq",
+		"group": "l",
+		"size": 5,
+		"imports": ["7", "58", "65", "66", "72"]
+	},
+	{
+		"name": "89",
+		"title": "Perfectly Legal",
+		"group": "l",
+		"size": 6,
+		"imports": ["66", "72", "73", "84", "86", "88"]
+	},
+	{
+		"name": "90",
+		"title": "Hegemony or Survival",
+		"group": "l",
+		"size": 5,
+		"imports": ["66", "70", "72"]
+	},
+	{
+		"name": "91",
+		"title": "The Exception to the Rulers",
+		"group": "l",
+		"size": 8,
+		"imports": ["31", "72", "74", "75", "79", "90"]
+	},
+	{
+		"name": "92",
+		"title": "Freethinkers",
+		"group": "l",
+		"size": 3,
+		"imports": ["72", "73", "75"]
+	},
+	{
+		"name": "93",
+		"title": "Had Enough?",
+		"group": "l",
+		"size": 7,
+		"imports": ["30", "66", "73", "86"]
+	},
+	{
+		"name": "94",
+		"title": "Its Still the Economy, Stupid!",
+		"group": "l",
+		"size": 7,
+		"imports": ["73", "84", "93"]
+	},
+	{
+		"name": "95",
+		"title": "Were Right Theyre Wrong",
+		"group": "l",
+		"size": 4,
+		"imports": ["61", "73", "94"]
+	},
+	{
+		"name": "96",
+		"title": "What Liberal Media?",
+		"group": "l",
+		"size": 6,
+		"imports": ["66", "73", "84", "94"]
+	},
+	{
+		"name": "97",
+		"title": "The Clinton Wars",
+		"group": "l",
+		"size": 6,
+		"imports": ["66", "73", "81", "84", "86", "96"]
+	},
+	{
+		"name": "98",
+		"title": "Weapons of Mass Deception",
+		"group": "l",
+		"size": 5,
+		"imports": ["73", "74", "87", "91"]
+	},
+	{
+		"name": "99",
+		"title": "Dude, Wheres My Country?",
+		"group": "l",
+		"size": 12,
+		"imports": ["30", "59", "60", "62", "63", "66", "73", "74", "84", "90", "93"]
+	},
+	{
+		"name": "100",
+		"title": "Thieves in High Places",
+		"group": "l",
+		"size": 12,
+		"imports": ["62", "66", "73", "79", "83", "84", "86", "91", "96", "98", "99"]
+	},
+	{
+		"name": "101",
+		"title": "Shrub",
+		"group": "l",
+		"size": 5,
+		"imports": ["61", "84", "86", "94", "100"]
+	},
+	{
+		"name": "102",
+		"title": "Buck Up Suck Up",
+		"group": "l",
+		"size": 4,
+		"imports": ["46", "93", "94", "95"]
+	},
+	{
+		"name": "30",
+		"title": "The Price of Loyalty",
+		"group": "l",
+		"size": 20,
+		"imports": ["4", "7"]
+	},
+	{
+		"name": "31",
+		"title": "House of Bush, House of Saud",
+		"group": "l",
+		"size": 11,
+		"imports": ["4", "30"]
+	},
+    {
+		"name": "86",
+		"title": "Lies and the Lying Liars Who Tell Them",
+		"group": "l",
+		"size": 14,
+		"imports": ["30", "60", "61", "66", "72", "73", "76", "81", "84"]
+	},
+	{
+		"name": "87",
+		"title": "MoveOns 50 Ways to Love Your Country",
+		"group": "l",
+		"size": 5,
+		"imports": ["72", "74", "83", "84"]
+	},
+	{
+		"name": "88",
+		"title": "The Buying of the President 2004",
+		"group": "l",
+		"size": 5,
+		"imports": ["66", "72", "74", "84"]
+	}, {
+		"name": "69",
+		"title": "Colossus",
+		"group": "n",
+		"size": 5,
+		"imports": ["51", "58", "64", "65"]
+	},
+	{
+		"name": "76",
+		"title": "Plan of Attack",
+		"group": "n",
+		"size": 13,
+		"imports": ["30", "31", "49", "53", "66", "71", "72", "75"]
+	},
+	{
+		"name": "103",
+		"title": "The Future of Freedom",
+		"group": "n",
+		"size": 2,
+		"imports": ["67"]
+	},
+	{
+		"name": "104",
+		"title": "Empire",
+		"group": "n",
+		"size": 3,
+		"imports": ["67", "69", "103"]
+	},
+	{
+		"name": "0",
+		"title": "1000 Years for Revenge",
+		"group": "n",
+		"size": 6,
+		"imports": []
+	},
+	{
+		"name": "51",
+		"title": "Surprise, Security, the American Experience",
+		"group": "n",
+		"size": 6,
+		"imports": ["9"]
+	},
+	{
+		"name": "48",
+		"title": "The Perfect Wife",
+		"group": "n",
+		"size": 4,
+		"imports": ["9", "20"]
+	},
+	{
+		"name": "46",
+		"title": "Power Plays",
+		"group": "n",
+		"size": 4,
+		"imports": ["8", "12"]
+	},
+	{
+		"name": "18",
+		"title": "Meant To Be",
+		"group": "n",
+		"size": 3,
+		"imports": ["3", "6", "12"]
+	},
+	{
+		"name": "7",
+		"title": "Ghost Wars",
+		"group": "n",
+		"size": 8,
+		"imports": ["2", "5", "6"]
+	},
+	{
+		"name": "4",
+		"title": "Sleeping With the Devil",
+		"group": "n",
+		"size": 8,
+		"imports": ["0", "2"]
+	},
+	{
+		"name": "28",
+		"title": "All the Shahs Men",
+		"group": "n",
+		"size": 3,
+		"imports": ["4"]
+	},
+	{
+		"name": "6",
+		"title": "Why America Slept",
+		"group": "n",
+		"size": 11,
+		"imports": ["0", "1", "4", "5"]
+	}
+]

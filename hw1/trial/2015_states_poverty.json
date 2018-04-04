@@ -1,0 +1,308 @@
+[
+  {
+    "state": "Alabama",
+    "totalPop": 4820,
+    "povPop": 784,
+    "povPercent": 16.3
+  },
+  {
+    "state": "Alaska",
+    "totalPop": 703,
+    "povPop": 65,
+    "povPercent": 9.2
+  },
+  {
+    "state": "Arizona",
+    "totalPop": 6728,
+    "povPop": 1156,
+    "povPercent": 17.2
+  },
+  {
+    "state": "Arkansas",
+    "totalPop": 2951,
+    "povPop": 475,
+    "povPercent": 16.1
+  },
+  {
+    "state": "California",
+    "totalPop": 39081,
+    "povPop": 5441,
+    "povPercent": 13.9
+  },
+  {
+    "state": "Colorado",
+    "totalPop": 5420,
+    "povPop": 538,
+    "povPercent": 9.9
+  },
+  {
+    "state": "Connecticut",
+    "totalPop": 3572,
+    "povPop": 324,
+    "povPercent": 9.1
+  },
+  {
+    "state": "Delaware",
+    "totalPop": 958,
+    "povPop": 106,
+    "povPercent": 11.1
+  },
+  {
+    "state": "District of Columbia",
+    "totalPop": 676,
+    "povPop": 113,
+    "povPercent": 16.6
+  },
+  {
+    "state": "Florida",
+    "totalPop": 20071,
+    "povPop": 3253,
+    "povPercent": 16.2
+  },
+  {
+    "state": "Georgia",
+    "totalPop": 10100,
+    "povPop": 1833,
+    "povPercent": 18.1
+  },
+  {
+    "state": "Hawaii",
+    "totalPop": 1382,
+    "povPop": 151,
+    "povPercent": 10.9
+  },
+  {
+    "state": "Idaho",
+    "totalPop": 1657,
+    "povPop": 204,
+    "povPercent": 12.3
+  },
+  {
+    "state": "Illinois",
+    "totalPop": 12683,
+    "povPop": 1380,
+    "povPercent": 10.9
+  },
+  {
+    "state": "Indiana",
+    "totalPop": 6502,
+    "povPop": 880,
+    "povPercent": 13.5
+  },
+  {
+    "state": "Iowa",
+    "totalPop": 3100,
+    "povPop": 321,
+    "povPercent": 10.4
+  },
+  {
+    "state": "Kansas",
+    "totalPop": 2849,
+    "povPop": 404,
+    "povPercent": 14.2
+  },
+  {
+    "state": "Kentucky",
+    "totalPop": 4365,
+    "povPop": 851,
+    "povPercent": 19.5
+  },
+  {
+    "state": "Louisiana",
+    "totalPop": 4599,
+    "povPop": 854,
+    "povPercent": 18.6
+  },
+  {
+    "state": "Maine",
+    "totalPop": 1340,
+    "povPop": 165,
+    "povPercent": 12.3
+  },
+  {
+    "state": "Maryland",
+    "totalPop": 5892,
+    "povPop": 566,
+    "povPercent": 9.6
+  },
+  {
+    "state": "Massachusetts",
+    "totalPop": 6777,
+    "povPop": 782,
+    "povPercent": 11.5
+  },
+  {
+    "state": "Michigan",
+    "totalPop": 9852,
+    "povPop": 1259,
+    "povPercent": 12.8
+  },
+  {
+    "state": "Minnesota",
+    "totalPop": 5458,
+    "povPop": 428,
+    "povPercent": 7.8
+  },
+  {
+    "state": "Mississippi",
+    "totalPop": 2947,
+    "povPop": 563,
+    "povPercent": 19.1
+  },
+  {
+    "state": "Missouri",
+    "totalPop": 5946,
+    "povPop": 582,
+    "povPercent": 9.8
+  },
+  {
+    "state": "Montana",
+    "totalPop": 1018,
+    "povPop": 121,
+    "povPercent": 11.9
+  },
+  {
+    "state": "Nebraska",
+    "totalPop": 1858,
+    "povPop": 192,
+    "povPercent": 10.3
+  },
+  {
+    "state": "Nevada",
+    "totalPop": 2864,
+    "povPop": 371,
+    "povPercent": 13
+  },
+  {
+    "state": "New Hampshire",
+    "totalPop": 1293,
+    "povPop": 94,
+    "povPercent": 7.3
+  },
+  {
+    "state": "New Jersey",
+    "totalPop": 8936,
+    "povPop": 1004,
+    "povPercent": 11.2
+  },
+  {
+    "state": "New Mexico",
+    "totalPop": 2036,
+    "povPop": 400,
+    "povPercent": 19.7
+  },
+  {
+    "state": "New York",
+    "totalPop": 19645,
+    "povPop": 2791,
+    "povPercent": 14.2
+  },
+  {
+    "state": "North Carolina",
+    "totalPop": 9887,
+    "povPop": 1509,
+    "povPercent": 15.3
+  },
+  {
+    "state": "North Dakota",
+    "totalPop": 763,
+    "povPop": 82,
+    "povPercent": 10.7
+  },
+  {
+    "state": "Ohio",
+    "totalPop": 11435,
+    "povPop": 1550,
+    "povPercent": 13.6
+  },
+  {
+    "state": "Oklahoma",
+    "totalPop": 3887,
+    "povPop": 551,
+    "povPercent": 14.2
+  },
+  {
+    "state": "Oregon",
+    "totalPop": 4029,
+    "povPop": 478,
+    "povPercent": 11.9
+  },
+  {
+    "state": "Pennsylvania",
+    "totalPop": 12564,
+    "povPop": 1542,
+    "povPercent": 12.3
+  },
+  {
+    "state": "Rhode Island",
+    "totalPop": 1044,
+    "povPop": 123,
+    "povPercent": 11.8
+  },
+  {
+    "state": "South Carolina",
+    "totalPop": 4790,
+    "povPop": 683,
+    "povPercent": 14.3
+  },
+  {
+    "state": "South Dakota",
+    "totalPop": 848,
+    "povPop": 118,
+    "povPercent": 13.9
+  },
+  {
+    "state": "Tennessee",
+    "totalPop": 6605,
+    "povPop": 973,
+    "povPercent": 14.7
+  },
+  {
+    "state": "Texas",
+    "totalPop": 27396,
+    "povPop": 4036,
+    "povPercent": 14.7
+  },
+  {
+    "state": "Utah",
+    "totalPop": 3004,
+    "povPop": 279,
+    "povPercent": 9.3
+  },
+  {
+    "state": "Vermont",
+    "totalPop": 609,
+    "povPop": 65,
+    "povPercent": 10.7
+  },
+  {
+    "state": "Virginia",
+    "totalPop": 8216,
+    "povPop": 894,
+    "povPercent": 10.9
+  },
+  {
+    "state": "Washington",
+    "totalPop": 7193,
+    "povPop": 819,
+    "povPercent": 11.4
+  },
+  {
+    "state": "West Virginia",
+    "totalPop": 1795,
+    "povPop": 261,
+    "povPercent": 14.5
+  },
+  {
+    "state": "Wisconsin",
+    "totalPop": 5736,
+    "povPop": 654,
+    "povPercent": 11.4
+  },
+  {
+    "state": "Wyoming",
+    "totalPop": 574,
+    "povPop": 56,
+    "povPercent": 9.8
+  }
+]

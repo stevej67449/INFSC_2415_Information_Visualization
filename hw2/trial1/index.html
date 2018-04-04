@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+.link {
+  stroke: #999;
+  stroke-opacity: .6;
+    stroke-width: 4;
+    stroke-width: .5;
+}
+.node {
+  stroke: #fff;
+  stroke-width: .5px;
+}
+.node text {
+  pointer-events: none;
+  font: 15px sans-serif;
+  font-weight: bolder;
+}
+.node.n{
+  fill: green;
+  stroke-opacity: .3; 
+  stroke-width: 4;
+}
+.node.c{
+  fill: red;
+  stroke-opacity: .3; 
+  stroke-width: 4;
+}
+.node.l{
+  fill: blue;
+  stroke-opacity: .3;
+  stroke-width: 4; 
+}
+    
+    .container {
+        float: left;
+        width: 15%;
+        display: table;
+    }  
+    
+    .holder {
+        display: table-cell;
+        width: 20%;
+    }
+    
+.legend {
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin: 5px;
+    border: 1px solid rgba(0, 0, 0, .2);
+}
+
+.n{
+  background-color: green;
+}
+.c{
+  background-color: red;
+}
+.l{
+  background-color: blue;
+} 
+
+    .hidden {
+        display: none;
+    }
+    
+
+</style>
+
+<body>
+    <div >
+        <h1>Visulaizing Political Echo Chambers</h1>
+        <h3>Analyzing reading habits by political affiliation.</h3>
+        
+        <div class="container">
+            <div class="holder"> <div class="legend l"></div><h5>Liberal</h5></div>
+            <div class="holder"><div class="legend n"></div><h5 >Neutral</h5></div>
+            <div class="holder"><div class="legend c"></div><h5>Conservative</h5></div>
+        </div>
+<form>
+  <input name="filter" type="radio" value="0" id="showAll" onclick="update()" checked>
+  <label for="showAll"> Show All </label>
+    
+  <input name="filter" type="radio" value="5" id="overFive" onclick="update()">
+  <label for="overFive"> 5+ Connections</label>
+    
+    <input name="filter" type="radio" value="10" id="overTen" onclick="update()">
+  <label for="overTen"> 10+ Connections</label>
+    
+    <input name="filter" type="radio" value="15" id="overFifteen" onclick="update()">
+  <label for="overFifteen"> 15+ Connections</label>
+</form>
+
+<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>  	
+<script>
+    
+        
+var linkpath = ("links.csv");
+var nodepath = ("nodes.csv");
+var width = 1500,
+    height = 1000;
+var color = d3.scale.category20();
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+      
+//Want to have different labels
+// SETTING UP THE FORCE LAYOUT
+  var force = d3.layout.force()
+  //using width/height from above, but size is mainly det'd by linkDistance and charge
+    .size([width, height])  
+    // how far between nodes                         
+    .linkDistance(200) 
+    // changes how close nodes will get to each other. Neg is farther apart.
+    .charge(-500);
+
+var filterVal = d3.select('input[name="filter"]:checked').node().value; 
+filterVal = parseInt(filterVal);     
+     
+d3.csv(nodepath, function(nodes) {
+ 
+  var nodelookup = {};
+  var nodecollector = {};
+   count = 0; 
+// we want to create a lookup table that will relate the links file and the nodes file
+    nodes.forEach(function(row) {
+    nodelookup[row.node] = count; 
+
+       nodecollector[row.node] = {name: row.node, title: row.title, group: row.group, degree: row.degree};
+        count++;  
+  
+ });
+ 
+//filter control
+ 
+                                              
+//Get all the links out of of the csv in a way that will match up with the nodes
+ 
+d3.csv(linkpath, function(linkchecker) {
+  var linkcollector = {};
+  indexsource = 0;
+  indextarget = 0; 
+    count= 0;
+
+    linkchecker.forEach(function(link) {  
+        
+	linkcollector[count] = {source: nodelookup[link.source], target: nodelookup[link.target]};
+	count++
+});
+//console.log(linkcollector)
+var nodes = d3.values(nodecollector);
+var links = d3.values(linkcollector);
+//console.log(nodes)
+//console.log(links)
+  // Create the link lines.
+  var link = svg.selectAll(".link")
+      .data(links)
+     .enter().append("line")
+     .attr("class", function(d) { return "link " + d.type; })
+        
+  // Create the node circles.
+  var node = svg.selectAll(".node")
+      .data(nodes)
+    .enter().append("g")
+      .attr("class", "node")
+    .call(force.drag);
+ 
+ //put in little circles to drag
+  node.append("circle")
+      .attr("r", function(d){
+            return d.degree;
+        })
+    .attr("class", function(d) { return "node " + d.group; })
+    .call(force.drag);
+    
+//add the words  
+ node.append("text")
+      .attr("dx", 18)
+      .attr("dy", ".35em")
+      .text(function(d) { return d.title });   
+      
+//get it going!
+ force
+      .nodes(nodes)
+      .links(links)
+      .start();
+  force.on("tick", function() {
+  
+  
+    link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+//I think that translate changes all of the x and ys at once instead of one by one?
+    node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+   
+  })
+ 
+  });
+  });
+    
+
+function update() {  
+    filterVal = d3.select('input[name="filter"]:checked').node().value; 
+    filterVal = parseInt(filterVal);
+
+    d3.selectAll('g.node')
+        .each(function(d) {
+            if (d.degree < filterVal) {
+                d3.select(this).classed("hidden", true);
+            } else {
+               d3.select(this).classed("hidden", false); 
+            }
+    });
+    
+}
+    
+/*
+This visual is heavily based on code from the following example:
+https://gist.github.com/ccmcc/5182685#file-links-csv
+*/
+</script>
